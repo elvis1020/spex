@@ -5,6 +5,9 @@ from lmfit.models import GaussianModel, ConstantModel, SkewedGaussianModel,\
 from scipy.interpolate import interp1d
 
 
+# TODO: put descriptions in docstrings
+# TODO: explain inputs and ouputs
+
 #apparent continuum regions on giraffe spectra
 cnt_regions = [(5672.5, 5674.8),
                (5763.9, 5765.8),
@@ -135,3 +138,4 @@ def clean(spectra, sigfactor=2.6):
             errflg = False
             
     return np.array([xn, yn])
+
