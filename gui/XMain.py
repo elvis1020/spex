@@ -2,35 +2,55 @@ __all__ = ["XMain"]
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from spex.guimisc import *
+from .guimisc import *
 
-_objs = []
-def keep_ref(obj):
-    _objs.append(obj)
-    return obj
 
 class XMain(QMainWindow):
     def __init__(self, *args):
         QMainWindow.__init__(self, *args)
 
-        self.buttonNewPlot = QPushButton("New plot", get_icon(""))
-        self.buttonSavePlot = QPushButton("Save plot")
-
-        self.layout0 = QHBoxLayout()
-        self.layout0.addWidget(self.buttonNewPlot)
-        self.layout0.addWidget(self.buttonSavePlot)
-
-        self.centralWidget = QWidget()
-        self.centralWidget.setLayout(self.layout0)
-
-        self.setCentralWidget(self.centralWidget)
+        # self.buttonNewPlot = QPushButton("New plot", get_icon("new-plot"))
+        # self.buttonSavePlot = QPushButton("Save plot")
 
 
-#         # self.menubar = QMenuBar(self)
-#         # self.menubar.setGeometry(QRect(0, 0, 772, 18))
-#         #self.menubar.setObjectName(_fromUtf8("menubar"))
-#         b = self.menuBar()
-#         m = self.menu_file = b.addMenu("&File")
+        # self.layout0.addWidget(self.buttonNewPlot)
+        # self.layout0.addWidget(self.buttonSavePlot)
+
+
+        # # All actions
+        self.action_newPlot = QAction(get_icon("new-plot"), "&New Plot", self)
+        self.action_savePlot = QAction(get_icon("save-plot"), "&Save Plot", self)
+        self.action_openPlot = QAction(get_icon("open-plot"), "&Open Plot", self)
+        self.action_help = QAction(get_icon("help"), "&Help Topics...", self)
+        self.action_about = QAction(get_icon("help"), "&About", self)
+
+
+        # # Menu bar
+        # Creates menu bar and adds actions to it
+        mb = self.menuBar()
+        m = keep_ref(mb.addMenu("&File"))
+        ac = keep_ref(m.addAction("&Quit"))
+        ac.setShortcut("Ctrl+Q")
+        ac.triggered.connect(self.close)
+
+        m = keep_ref(mb.addMenu("&Plot"))
+        m.addAction(self.action_newPlot)
+        m.addAction(self.action_savePlot)
+        m.addAction(self.action_openPlot)
+
+        m = keep_ref(mb.addMenu("&Help"))
+        m.addAction(self.action_help)
+
+        # # Tool bar
+        # Creates tool bar and adds actions to it
+        tb = self.toolBar = QToolBar()
+        tb.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        tb.addAction(self.action_newPlot)
+        tb.addAction(self.action_savePlot)
+        tb.addAction(self.action_openPlot)
+        tb.addAction(self.action_help)
+
+
 #         self.act_save = ac = m.addAction("&Save")
 #         ac.setShortcut("Ctrl+S")
 #         ac.triggered.connect(self.on_save)
@@ -47,3 +67,17 @@ class XMain(QMainWindow):
 #
 # #        place_left_top(self)
 
+
+
+        # # Main layout
+        # Just the tool bar and a spacer below
+
+        self.layout0 = QVBoxLayout()
+        self.layout0.addWidget(self.toolBar)
+        self.layout0.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
+        self.centralWidget = QWidget()
+        self.centralWidget.setLayout(self.layout0)
+
+
+        self.setCentralWidget(self.centralWidget)
