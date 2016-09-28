@@ -1,5 +1,8 @@
+__all__ = ["XMain"]
+
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from spex.guimisc import *
 
 _objs = []
 def keep_ref(obj):
@@ -10,7 +13,7 @@ class XMain(QMainWindow):
     def __init__(self, *args):
         QMainWindow.__init__(self, *args)
 
-        self.buttonNewPlot = QPushButton("New plot")
+        self.buttonNewPlot = QPushButton("New plot", get_icon)
         self.buttonSavePlot = QPushButton("Save plot")
 
         self.layout0 = QHBoxLayout()

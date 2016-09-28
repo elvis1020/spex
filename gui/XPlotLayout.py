@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
@@ -13,3 +14,9 @@ form = MyWindow()
 form.show()
 app.exec_()
 
+=======
+__all__ = ["XPlotLayout"]
+
+class XPlotLayout:
+    pass
+>>>>>>> f55a0659a4ad6452f07dec36d4e6593f6d4606db

@@ -1,1 +1,2 @@
-from XMain import XMain
+from .guimisc import *
+from gui import *
