@@ -13,7 +13,7 @@ class XMain(QMainWindow):
     def __init__(self, *args):
         QMainWindow.__init__(self, *args)
 
-        self.buttonNewPlot = QPushButton("New plot", get_icon)
+        self.buttonNewPlot = QPushButton("New plot", get_icon(""))
         self.buttonSavePlot = QPushButton("Save plot")
 
         self.layout0 = QHBoxLayout()
