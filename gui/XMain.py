@@ -3,11 +3,16 @@ __all__ = ["XMain"]
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from .guimisc import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 class XMain(QMainWindow):
     def __init__(self, *args):
         QMainWindow.__init__(self, *args)
+
+        self.setWindowTitle("SpeX toolbar")
+        self.setWindowIcon(get_icon("spexicon_barX"))
 
         # self.buttonNewPlot = QPushButton("New plot", get_icon("new-plot"))
         # self.buttonSavePlot = QPushButton("Save plot")
@@ -34,12 +39,15 @@ class XMain(QMainWindow):
         ac.triggered.connect(self.close)
 
         m = keep_ref(mb.addMenu("&Plot"))
-        m.addAction(self.action_newPlot)
+        ac = self.action_newPlot #= keep_ref(m.addAction("&New Plot"))
+        ac.triggered.connect(self.testplot)
+        
         m.addAction(self.action_savePlot)
         m.addAction(self.action_openPlot)
 
         m = keep_ref(mb.addMenu("&Help"))
         m.addAction(self.action_help)
+        m.addAction(self.action_about)
 
         # # Tool bar
         # Creates tool bar and adds actions to it
@@ -81,3 +89,11 @@ class XMain(QMainWindow):
 
 
         self.setCentralWidget(self.centralWidget)
+
+    def testplot(self):
+        fig1 = plt.figure("test plot")
+        ax1 = fig1.add_subplot(111)
+        xl = np.linspace(0, 10, 100)
+        ax1.plot(xl, np.sin(xl))
+        plt.ion()
+        plt.show(fig1)
