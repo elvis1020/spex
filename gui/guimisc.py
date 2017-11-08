@@ -2,8 +2,8 @@
 
 __all__ = ["get_icon", "keep_ref"]
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import os
 
 

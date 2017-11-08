@@ -1,7 +1,8 @@
 __all__ = ["XMain"]
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from .guimisc import *
 import numpy as np
 import matplotlib.pyplot as plt
